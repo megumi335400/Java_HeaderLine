@@ -28,4 +28,8 @@ public interface NewsHeadLineDao {
     int addHeadline(NewsHeadline newsHeadline);
 
     NewsHeadline findHeadlineByHid(Integer hid);
+
+    int updateHeadline(NewsHeadline newsHeadline);
+
+    int removeByHid(int hid);
 }

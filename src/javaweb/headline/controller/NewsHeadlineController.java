@@ -39,6 +39,21 @@ public class NewsHeadlineController extends BaseController {
     }
 
 
+    protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        NewsHeadline newsHeadline = WebUtil.readJson(req,NewsHeadline.class);
+        headlineService.updateHeadline(newsHeadline);
+        Result result =Result.ok(null);
+        WebUtil.writeJson(resp,result);
+
+    }
+
+
+    protected void removeByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int hid = Integer.parseInt(req.getParameter("hid"));
+        headlineService.removeByHid(hid);
+        WebUtil.writeJson(resp,Result.ok(null));
+    }
+
     protected void findHeadlineByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer hid = Integer.parseInt(req.getParameter("hid"));
         Map data = new HashMap();
