@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import javaweb.headline.common.Result;
 import javaweb.headline.pojo.NewsType;
+import javaweb.headline.pojo.vo.HeadlineDetailVo;
 import javaweb.headline.pojo.vo.HeadlineQueryVo;
 import javaweb.headline.service.NewsHeadlineService;
 import javaweb.headline.service.NewsTypeService;
@@ -34,7 +35,6 @@ public class PortalController extends BaseController{
     protected void findAllTypes(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<NewsType> newsTypeList  =  typeService.findAll();
         Result result = Result.ok(newsTypeList);
-
         WebUtil.writeJson(resp,result);
     }
     protected void findNewsPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,4 +44,17 @@ public class PortalController extends BaseController{
         data.put("pageInfo",pageInfo);
         WebUtil.writeJson(resp,Result.ok(data));
     }
+
+    protected void showHeadlineDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Integer hid =Integer.parseInt(req.getParameter("hid"));
+        HeadlineDetailVo headlineDetailVo =  headlineService.findHeadlineDetail(hid);
+        Map data = new HashMap();
+        data.put("headline",headlineDetailVo);
+
+        Result result = Result.ok(data);
+        WebUtil.writeJson(resp,result);
+    }
+
+
+
 }
