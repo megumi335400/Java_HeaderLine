@@ -1,5 +1,6 @@
 package javaweb.headline.dao;
 
+import javaweb.headline.pojo.NewsHeadline;
 import javaweb.headline.pojo.vo.HeadlineDetailVo;
 import javaweb.headline.pojo.vo.HeadlinePageVo;
 import javaweb.headline.pojo.vo.HeadlineQueryVo;
@@ -23,4 +24,8 @@ public interface NewsHeadLineDao {
     int incrPageViews(Integer hid);
 
     HeadlineDetailVo findHeadlineDetail(Integer hid);
+
+    int addHeadline(NewsHeadline newsHeadline);
+
+    NewsHeadline findHeadlineByHid(Integer hid);
 }

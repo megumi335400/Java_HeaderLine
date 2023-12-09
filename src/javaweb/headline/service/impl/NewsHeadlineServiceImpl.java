@@ -2,6 +2,7 @@ package javaweb.headline.service.impl;
 
 import javaweb.headline.dao.NewsHeadLineDao;
 import javaweb.headline.dao.impl.NewsHeadlineDaoImpl;
+import javaweb.headline.pojo.NewsHeadline;
 import javaweb.headline.pojo.vo.HeadlineDetailVo;
 import javaweb.headline.pojo.vo.HeadlinePageVo;
 import javaweb.headline.pojo.vo.HeadlineQueryVo;
@@ -43,5 +44,15 @@ public class NewsHeadlineServiceImpl  implements NewsHeadlineService {
         headlineDao.incrPageViews(hid);
 
         return headlineDao.findHeadlineDetail(hid);
+    }
+
+    @Override
+    public int addHeadline(NewsHeadline newsHeadline) {
+        return headlineDao.addHeadline(newsHeadline);
+    }
+
+    @Override
+    public NewsHeadline findHeadlineByHid(Integer hid) {
+        return headlineDao.findHeadlineByHid(hid);
     }
 }

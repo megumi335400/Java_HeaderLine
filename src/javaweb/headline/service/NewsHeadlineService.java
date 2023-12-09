@@ -1,5 +1,6 @@
 package javaweb.headline.service;
 
+import javaweb.headline.pojo.NewsHeadline;
 import javaweb.headline.pojo.vo.HeadlineDetailVo;
 import javaweb.headline.pojo.vo.HeadlineQueryVo;
 
@@ -18,4 +19,8 @@ public interface NewsHeadlineService {
     Map findPage(HeadlineQueryVo headlineQueryVo);
 
     HeadlineDetailVo findHeadlineDetail(Integer hid);
+
+    int addHeadline(NewsHeadline newsHeadline);
+
+    NewsHeadline findHeadlineByHid(Integer hid);
 }

@@ -2,6 +2,7 @@ package javaweb.headline.dao.impl;
 
 import javaweb.headline.dao.BaseDao;
 import javaweb.headline.dao.NewsHeadLineDao;
+import javaweb.headline.pojo.NewsHeadline;
 import javaweb.headline.pojo.vo.HeadlineDetailVo;
 import javaweb.headline.pojo.vo.HeadlinePageVo;
 import javaweb.headline.pojo.vo.HeadlineQueryVo;
@@ -89,6 +90,31 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadLineDao {
                 h.hid = ?
                 """;
         List<HeadlineDetailVo> list = baseQuery(HeadlineDetailVo.class,sql,hid);
+        return list!=null&&list.size()>0?list.get(0):null;
+    }
+
+    @Override
+    public int addHeadline(NewsHeadline newsHeadline) {
+        String sql = """
+                insert into news_headline
+                values(DEFAULT,?,?,?,?,0,now(),now(),0)
+                """;
+        return baseUpdate(sql,newsHeadline.getTitle(),
+                newsHeadline.getArticle(),
+                newsHeadline.getType(),
+                newsHeadline.getPublisher());
+
+    }
+
+    @Override
+    public NewsHeadline findHeadlineByHid(Integer hid) {
+        String sql = """
+                select hid,title,article,type,publisher,page_views pageViews,create_time CreateTime,
+                update_time updateTime,is_deleted isDeleted
+                from news_headline
+                where hid = ?
+                """;
+        List<NewsHeadline> list = baseQuery(NewsHeadline.class,sql,hid);
         return list!=null&&list.size()>0?list.get(0):null;
     }
 }
